@@ -1,7 +1,7 @@
 # ----
 # Site
 
-title: MonosLab
+title: Mono's Lab.
 url: "https://monoslab.github.io/home/"
 baseurl:
 google_analytics_key:
@@ -9,7 +9,7 @@ show_full_navigation: true
 
 # Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
 logo: /siteicon.png
-description: MonosLab.
+description: Mono's Lab.
 author:
   name: Kwangsoo Seo
   email:
