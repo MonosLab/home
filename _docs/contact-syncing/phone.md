@@ -1,6 +1,6 @@
 ---
 title: Phone
-category: Contact Syncing
+category: contact-syncing
 order: 2
 ---
 

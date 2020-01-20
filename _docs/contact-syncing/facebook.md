@@ -1,6 +1,6 @@
 ---
 title: Facebook
-category: Contact Syncing
+category: contact-syncing
 order: 1
 ---
 

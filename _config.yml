@@ -80,10 +80,8 @@ types:
 
 navigation:
  - title: Home
-   url: /index.html
- - title: About
-   url: /about
+   url: /index.md
  - title: Categories
    url: /category
- - title: Contact
-   url: /contact
+ - title: Changelog
+   url: /changelog.html
