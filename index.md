@@ -1,38 +1,45 @@
 ---
-title: Welcome
+title: 오픈중
 ---
 
-This is the **Edition** template from [CloudCannon](http://cloudcannon.com/).
-**Edition** is perfect for documenting your product, application or service.
-It's populated with example content to give you some ideas.
+이 블로그는 **개인 프로젝트**의 모든 내용을 [공유](http://blog.naver.com/chps74) 할 것이다.
+**개인 프로젝트**에 모든것들.. 테스트입니다.
 
-ChatApp is a fictional chat application for sending messages and media to others.
-Teams and friend groups would use ChatApp to stay up to date if it existed.
+> 참고 샘플
 
-> [Sign up](http://example.com/signup) or learn more about ChatApp at [example.com](http://example.com/).
+## 대 제목
+* 빨강
+  * 녹색
+    * 파랑
+	
+### 중간 제목
 
-### Getting Started
+리스트
 
-Getting a message sent is quick and easy with ChatApp:
+1. 테스트1
+2. 테스트2
+3. 테스트3
 
-1. Sign up for an account
-2. Add your friends from their email addresses
-3. Type a message or send a photo
+***
 
-> Feel free to send us a message at [feedback@example.com](mailto:feedback@example.com) with your feedback.
+*single asterisks*
+_single underscores_
+**double asterisks**
+__double underscores__
+~~cancelline~~
 
-### Features
 
-Explore more of ChatApp by reading about our features:
+> 참고 두번째
 
-#### Media
+## 코드블럭
 
-Send images, videos and other media to people. Sources include your computer, phone and Facebook.
+```
+This is a code block.
+```
 
-#### Contact Syncing
+## 테이블
 
-Sync your contact list with your phone and/or Facebook contacts. Never lose your contacts between devices again!
+| foo | bar |
+| --- | --- |
+| baz | bim |
 
-#### Devices
-
-ChatApp is available everywhere. Find out how to set it up on your all your devices.
