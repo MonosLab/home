@@ -1,7 +1,7 @@
 ---
 title: Phone
 category: contact-syncing
-order: 2
+order: 1
 ---
 
 Sync your phone contacts with ChatApp. ChatApp saves your phone contacts and adds anyone with an email address to your contact list!
