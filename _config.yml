@@ -3,7 +3,7 @@
 
 title: Mono's Lab.
 url: "https://monoslab.github.io/home/"
-baseurl:
+baseurl: "/home"
 google_analytics_key:
 show_full_navigation: true
 
