@@ -28,7 +28,7 @@
 		<header>
 			<h1>
 				<a href="{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/emblem.svg" width="40" height="40" alt="{{ site.title }} logo"></a>
-				{{ site.title }}
+				{{ site.title }} []
 				<button type="button" class="open-nav" id="open-nav"></button>
 			</h1>
 
@@ -64,6 +64,13 @@
 					<li class="nav-item top-level {% if page.url == '/changelog/' %}current{% endif %}">
 						{% assign changelog = site.html_pages | where: 'url', '/changelog/' | first %}
 						<a href="{{ site.baseurl }}/changelog/">{{ changelog.title }}</a>
+					</li>
+				</ul>
+
+				<ul>
+					<li class="nav-item top-level {% if page.url == '/categories/' %}current{% endif %}">
+						{% assign categories = site.html_pages | where: 'url', '/categories/' | first %}
+						<a href="{{ site.baseurl }}/categories/">{{ categories.title }}</a>
 					</li>
 				</ul>
 			</nav>

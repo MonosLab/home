@@ -1,5 +1,6 @@
 ---
 layout: default
+title: contact-syncing
 ---
 
 # contact-syncing 카테고리의 글

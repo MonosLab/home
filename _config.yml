@@ -22,7 +22,7 @@ social:
 # -----
 # Build
 
-timezone: Etc/UTC+9
+timezone: Asia/Seoul
 
 permalink: pretty
 
@@ -77,11 +77,3 @@ defaults:
 types:
   - minor
   - major
-
-navigation:
- - title: Home
-   url: /index.md
- - title: Categories
-   url: /category
- - title: Changelog
-   url: /changelog.html
