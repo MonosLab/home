@@ -1,6 +1,6 @@
 ---
 title: Phone
-category: contact-syncing
+category: 사금
 order: 1
 ---
 

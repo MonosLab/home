@@ -1,6 +1,6 @@
 ---
-title: Video
-category: Media
+title: 비디오
+category: 어플리케이션
 order: 2
 ---
 

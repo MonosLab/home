@@ -1,6 +1,6 @@
 ---
 title: iOS
-category: Devices
+category: 프로그래밍
 order: 1
 ---
 

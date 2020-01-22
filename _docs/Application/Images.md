@@ -1,6 +1,6 @@
 ---
-title: Images
-category: Media
+title: 이미지
+category: 어플리케이션
 order: 1
 ---
 

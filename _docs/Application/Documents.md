@@ -1,6 +1,6 @@
 ---
-title: Documents
-category: Media
+title: 문서들
+category: 어플리케이션
 order: 3
 ---
 

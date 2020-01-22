@@ -47,13 +47,13 @@
                     <ul class="toc-tree nav__toc">
 						<li class="tree-element toc-tree__node toc-tree__node--level_0">
 							{% assign home = site.html_pages | where: 'url', '/' | first %}
-							<a href="{{ site.baseurl }}/" class="toc-tree__title toc-tree__title--link">{{ home.title }}</a>
+							<a href="{{ site.baseurl }}/" class="toc-tree__title-hover toc-tree__title--link">{{ home.title }}</a>
 						</li>
 						<hr>
 						<li class="tree-element toc-tree__node toc-tree__node--level_0">
-						<label class="tree-label toc-tree__title" for="{{ group.name }}">카테고리</label>
+						<label class="tree-label-nohover toc-tree__title" for="{{ group.name }}">카테고리</label>
 						</li>
-					{% assign categories = "contact-syncing, Devices, Media" | split: ", " %}
+					{% assign categories = "어플리케이션, 프로그래밍, 사금" | split: ", " %}
 					{% assign grouped = site.docs | group_by: 'category' %}
 					{% for category in categories %}
 						{% for group in grouped %}
@@ -66,7 +66,6 @@
 								{% for item in items %}
 									{% if item.url == page.url and item.category == group.name %}
 										{% assign expand = true %}
-
 									{% endif %}
 								{% endfor %}
 								<label class="tree-label toc-tree__title" for="{{ group.name }}">{{ group.name }} ({{ group.items.size }})</label>
@@ -111,7 +110,7 @@
 						<hr>
 						<li class="tree-element toc-tree__node toc-tree__node--level_0">
 							{% assign changelog = site.html_pages | where: 'url', '/changelog/' | first %}
-							<a href="{{ site.baseurl }}/changelog/" class="toc-tree__title toc-tree__title--link">{{ changelog.title }}</a>
+							<a href="{{ site.baseurl }}/changelog/" class="toc-tree__title-hover toc-tree__title--link">{{ changelog.title }}</a>
 						</li>
                     </ul>
                 </div>

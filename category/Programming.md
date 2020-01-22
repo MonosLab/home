@@ -4,11 +4,11 @@ category:
 order: 1
 ---
 
-# Devices
+# Programming
 
 <ul>
   {% for post in site.docs %}
-	{% if post.category == "Devices" %}
+	{% if post.category == "Programming" %}
 		<li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
 	{% endif %}
   {% endfor %}

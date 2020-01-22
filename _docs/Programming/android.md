@@ -1,6 +1,6 @@
 ---
 title: Android
-category: Devices
+category: 프로그래밍
 order: 2
 ---
 

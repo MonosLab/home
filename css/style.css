@@ -60,6 +60,10 @@ ol, ul {
     color: #161616;
 }
 
+.nav .tree-label-nohover {
+    display: block;
+}
+
 .nav .tree-selector {
     position: absolute;
     top: 0;
@@ -10452,6 +10456,22 @@ table .note ol, table .note ul, table .tip ol, table .tip ul, table .todo ol, ta
     line-height: 19.25px;
 }
 
+.toc-tree__title-hover {
+    padding-top: 0px;
+    padding-right: 5px;
+    padding-bottom: 12px;
+    outline: 0;
+    cursor: default;
+    color: #343434;
+    font-size: 14px;
+    line-height: 19.25px;
+}
+
+.toc-tree__title-hover:hover {
+    font-weight: bold;
+    color: #161616;
+}
+
 .toc-tree__title--link, .toc-tree__title--link:visited {
     display: block;
     cursor: pointer;
@@ -10521,6 +10541,10 @@ table .note ol, table .note ul, table .tip ol, table .tip ul, table .todo ol, ta
 }
 
 .toc-tree__node--level_0 .toc-tree__title {
+    padding-left: 26px
+}
+
+.toc-tree__node--level_0 .toc-tree__title-hover {
     padding-left: 26px
 }
 

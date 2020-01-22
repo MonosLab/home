@@ -1,14 +1,14 @@
 ---
 title: 
 category:
-order: 1
+order: 3
 ---
 
-# Contact-syncing
+# Gold placer
 
 <ul>
   {% for post in site.docs %}
-	{% if post.category == "contact-syncing" %}
+	{% if post.category == "GoldPlacer" %}
 		<li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
 	{% endif %}
   {% endfor %}

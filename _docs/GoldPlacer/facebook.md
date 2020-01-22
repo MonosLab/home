@@ -1,6 +1,6 @@
 ---
 title: Facebook
-category: contact-syncing
+category: 사금
 order: 2
 ---
 
