@@ -45,6 +45,14 @@
                         <input type="submit" value="Search" style="display: none;">
                     </form>
                     <ul class="toc-tree nav__toc">
+						<li class="tree-element toc-tree__node toc-tree__node--level_0">
+							{% assign home = site.html_pages | where: 'url', '/' | first %}
+							<a href="{{ site.baseurl }}/" class="toc-tree__title toc-tree__title--link">{{ home.title }}</a>
+						</li>
+						<hr>
+						<li class="tree-element toc-tree__node toc-tree__node--level_0">
+						<label class="tree-label toc-tree__title" for="{{ group.name }}">카테고리</label>
+						</li>
 					{% assign categories = "contact-syncing, Devices, Media" | split: ", " %}
 					{% assign grouped = site.docs | group_by: 'category' %}
 					{% for category in categories %}
@@ -100,6 +108,11 @@
 							{% endif %}
 						{% endfor %}
 					{% endfor %}
+						<hr>
+						<li class="tree-element toc-tree__node toc-tree__node--level_0">
+							{% assign changelog = site.html_pages | where: 'url', '/changelog/' | first %}
+							<a href="{{ site.baseurl }}/changelog/" class="toc-tree__title toc-tree__title--link">{{ changelog.title }}</a>
+						</li>
                     </ul>
                 </div>
             </div>
