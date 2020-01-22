@@ -10,12 +10,11 @@
 	{% feed_meta %}
 
 	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic|Open+Sans:400,400italic,600,600italic,700,700italic|Inconsolata:400,700">
-	<link rel="stylesheet" href="{{ site.baseurl }}/css/app.css">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/main.scss">
 	<link rel="apple-touch-icon" href="{{ site.baseurl }}/apple-touch-icon.png">
 	<link rel="icon" type="image/png" href="{{ site.baseurl }}/touch-icon.png" sizes="192x192">
 	<link rel="icon" type="image/png" href="{{ site.baseurl }}/images/favicon.png">
-	<link href="{{ site.baseurl }}/css/syntax.css" rel="stylesheet">
 
 	{% if jekyll.environment == 'production' and site.google_analytics_key != '' %}
 		<script>
@@ -31,13 +30,13 @@
 <div id="root" class="layout">
     <div data-reactroot="" class="layout">
         <div class="app">
-            <div class="hamburger _type-close _white header__nav-toggle" title="Show navigation" onclick="toggleMenu()">
-                <div class="hamburger__icon"></div>
+            <div class="tiger _type-close _white header__nav-toggle" title="Show navigation" onclick="toggleMenu()">
+                <div class="tiger__icon"></div>
             </div>
             <div class="app__nav">
                 <header class="header">
 					<div class="layout__container header__container">
-					<div class="group group--align-left header__title"><a href="{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/emblem.svg" width="40" height="40" alt="{{ site.title }} logo"> {{ site.title }}</a></div>
+					<div class="group group--align-left header__title"><a href="{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/favicon.svg" width="40" height="40" alt="{{ site.title }} logo"> {{ site.title }}</a></div>
                     </div>
 				</header>
 				<div class="nav">
@@ -46,74 +45,64 @@
                         <input type="submit" value="Search" style="display: none;">
                     </form>
                     <ul class="toc-tree nav__toc">
-                        {% assign categories = "contact-syncing, Devices, Media" | split: ", " %}
-                        {% assign grouped = site.docs | group_by: 'category' %}
-                            {% for category in categories %}
-                                {% for group in grouped %}
-                                    {% if group.name != "Components" and category == group.name %}
-                                        <li class="tree-element toc-tree__node toc-tree__node--level_0">
+					{% assign categories = "contact-syncing, Devices, Media" | split: ", " %}
+					{% assign grouped = site.docs | group_by: 'category' %}
+					{% for category in categories %}
+						{% for group in grouped %}
+							<!-- 예외항목 체크 //-->
+							{% if group.name != "Components" and category == group.name %}
+							<li class="tree-element toc-tree__node toc-tree__node--level_0">
+								{% assign items = group.items | sort %}
+								{% assign expand = false %}
 
-                                            {% assign items = group.items | sort %}
-                                            {% assign expand = false %}
+								{% for item in items %}
+									{% if item.url == page.url and item.category == group.name %}
+										{% assign expand = true %}
 
-                                            {% for item in items %}
-                                                {% if item.url == page.url and item.category == group.name %}
-                                                    {% assign expand = true %}
-
-                                                {% endif %}
-                                            {% endfor %}
-
-                                            <label class="tree-label toc-tree__title" for="{{ group.name }}">{{ group.name }} ({{ group.items.size }})</label>
-                                            <input class="tree-selector" type="checkbox" {% if expand %} checked {% endif %} id="{{ group.name }}" />
-
-
-                                            <ul class="toc-tree__nodes-list">
-                                                {% for item in items %}
-                                                    {% if item.draft %}
-
-                                                    {% else %}
-                                                        {% if item.type == "GroupHeader" %}
-
-                                                            <li class="tree-element toc-tree__node toc-tree__node--level_1 ">
-
-                                                            <li class="toc-tree__node toc-tree__node--level_1 {% if item.url == page.url %}toc-tree__title--selected{% endif %}">
-                                                                    <div class="toc-tree__title-wrapper">
-                                                                        <a href="{{ site.baseurl }}{{ item.url }}" class="toc-tree__title toc-tree__title--link">{{ item.title }}</a>
-                                                                    </div>
-                                                            </li>
-
-                                                            {% assign subpages = group.items | where:"subpageOf", item.title %}
-                                                            {% for subpage in subpages %}
-                                                                {% if subpage.draft %}
-                                                                {% else %}
-                                                                    <li class="toc-tree__node toc-tree__node--level_2 {% if subpage.url == page.url %}toc-tree__title--selected{% endif %}">
-                                                                        <div class="toc-tree__title-wrapper">
-                                                                            <a href="{{ site.baseurl }}{{ subpage.url }}" class="toc-tree__title toc-tree__title--link">{{ subpage.title }}</a>
-                                                                        </div>
-                                                                    </li>
-                                                                {% endif %}
-                                                            {% endfor %}
-
-                                                        {% elsif item.type == "Subpage" %}
-
-                                                        {% else %}
-                                                            <li class="toc-tree__node toc-tree__node--level_1 {% if item.url == page.url %}toc-tree__title--selected{% endif %}">
-                                                                <div class="toc-tree__title-wrapper">
-                                                                    <a href="{{ site.baseurl }}{{ item.url }}"
-                                                                       class="toc-tree__title toc-tree__title--link">{{ item.title }}</a></div>
-                                                            </li>
-                                                        {% endif %}
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </ul>
-                                        </li>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endfor %}
+									{% endif %}
+								{% endfor %}
+								<label class="tree-label toc-tree__title" for="{{ group.name }}">{{ group.name }} ({{ group.items.size }})</label>
+								<input class="tree-selector" type="checkbox" {% if expand %} checked {% endif %} id="{{ group.name }}" />
+								<ul class="toc-tree__nodes-list">
+								{% for item in items %}
+									{% if item.draft %}
+									{% else %}
+										{% if item.type == "GroupHeader" %}
+											<li class="tree-element toc-tree__node toc-tree__node--level_1 ">
+											<li class="toc-tree__node toc-tree__node--level_1 {% if item.url == page.url %}toc-tree__title--selected{% endif %}">
+													<div class="toc-tree__title-wrapper">
+														<a href="{{ site.baseurl }}{{ item.url }}" class="toc-tree__title toc-tree__title--link">{{ item.title }}</a>
+													</div>
+											</li>
+											{% assign subpages = group.items | where:"subpageOf", item.title %}
+											{% for subpage in subpages %}
+												{% if subpage.draft %}
+												{% else %}
+													<li class="toc-tree__node toc-tree__node--level_2 {% if subpage.url == page.url %}toc-tree__title--selected{% endif %}">
+														<div class="toc-tree__title-wrapper">
+															<a href="{{ site.baseurl }}{{ subpage.url }}" class="toc-tree__title toc-tree__title--link">{{ subpage.title }}</a>
+														</div>
+													</li>
+												{% endif %}
+											{% endfor %}
+										{% elsif item.type == "Subpage" %}
+										{% else %}
+											<li class="toc-tree__node toc-tree__node--level_1 {% if item.url == page.url %}toc-tree__title--selected{% endif %}">
+												<div class="toc-tree__title-wrapper">
+													<a href="{{ site.baseurl }}{{ item.url }}"
+													   class="toc-tree__title toc-tree__title--link">{{ item.title }}</a></div>
+											</li>
+										{% endif %}
+									{% endif %}
+								{% endfor %}
+								</ul>
+							</li>
+							{% endif %}
+						{% endfor %}
+					{% endfor %}
                     </ul>
                 </div>
             </div>
-
             {% if page.type == "full" %}
             <div class="app__main">
                 <div class="app__container full">
