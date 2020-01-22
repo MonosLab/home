@@ -1,83 +1,166 @@
 <!DOCTYPE html>
 
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="generator" content="Jekyll v{{ jekyll.version }}">
+	
+	{% seo %}
+	{% feed_meta %}
 
-		{% seo %}
-		{% feed_meta %}
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic|Open+Sans:400,400italic,600,600italic,700,700italic|Inconsolata:400,700">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/app.css">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/main.scss">
+	<link rel="apple-touch-icon" href="{{ site.baseurl }}/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="{{ site.baseurl }}/touch-icon.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="{{ site.baseurl }}/images/favicon.png">
+	<link href="{{ site.baseurl }}/css/syntax.css" rel="stylesheet">
 
-		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic|Open+Sans:400,400italic,600,600italic,700,700italic|Inconsolata:400,700">
-		<link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
-		<link rel="apple-touch-icon" href="{{ site.baseurl }}/apple-touch-icon.png">
-		<link rel="icon" type="image/png" href="{{ site.baseurl }}/touch-icon.png" sizes="192x192">
-		<link rel="icon" type="image/png" href="{{ site.baseurl }}/images/favicon.png">
-
-		{% if jekyll.environment == 'production' and site.google_analytics_key != '' %}
-			<script>
-				window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-				ga('create', '{{ site.google_analytics_key }}', 'auto');
-				ga('send', 'pageview');
-			</script>
-			<script async src='https://www.google-analytics.com/analytics.js'></script>
-		{% endif %}
-	</head>
-
-	<body>
-		<header>
-			<h1>
-				<a href="{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/emblem.svg" width="40" height="40" alt="{{ site.title }} logo"></a>
-				{{ site.title }}
-				<button type="button" class="open-nav" id="open-nav"></button>
-			</h1>
-
-			<form action="{{ site.baseurl }}/search/" method="get">
-				<input type="text" name="q" id="search-input" placeholder="Search" autofocus>
-				<input type="submit" value="Search" style="display: none;">
-			</form>
-
-			<nav {% if site.show_full_navigation %}class="full-navigation"{% endif %}>
-				<ul>
-					<li class="nav-item top-level {% if page.url == '/' %}current{% endif %}">
-						{% assign home = site.html_pages | where: 'url', '/' | first %}
-						<a href="{{ site.baseurl }}/">{{ home.title }}</a>
-					</li>
-				</ul>
-
-				<ul>
-					{% assign grouped = site.docs | group_by: 'category' %}
-					{% for group in grouped %}
-						<li class="nav-item top-level {% if group.name == page.category %}current{% endif %}">
-							{% assign items = group.items | sort: 'order' %}
-							<a href="{{ site.baseurl }}/category/{{ group.name }}/">{{ group.name }} ({{ group.items.size }})</a>
-						</li>
-					{% endfor %}
-				</ul>
-
-				<ul>
-					<li class="nav-item top-level {% if page.url == '/changelog/' %}current{% endif %}">
-						{% assign changelog = site.html_pages | where: 'url', '/changelog/' | first %}
-						<a href="{{ site.baseurl }}/changelog/">{{ changelog.title }}</a>
-					</li>
-				</ul>
-			</nav>
-		</header>
-
-		<section class="main">
-			<div class="page-header">
-				<h2>{% if page.category %}{{ page.category }}{% else %}{{ site.title }}{% endif %}</h2>
-				<h3>{{ page.title }}</h3>
-			</div>
-			<article class="content">
-				{{ content }}
-			</article>
-		</section>
-
+	{% if jekyll.environment == 'production' and site.google_analytics_key != '' %}
 		<script>
-			document.getElementById("open-nav").addEventListener("click", function () {
-				document.body.classList.toggle("nav-open");
-			});
+			window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+			ga('create', '{{ site.google_analytics_key }}', 'auto');
+			ga('send', 'pageview');
 		</script>
-	</body>
+		<script async src='https://www.google-analytics.com/analytics.js'></script>
+	{% endif %}
+</head>
+
+<body>
+<div id="root" class="layout">
+    <div data-reactroot="" class="layout">
+        <div class="app">
+            <div class="hamburger _type-close _white header__nav-toggle" title="Show navigation" onclick="toggleMenu()">
+                <div class="hamburger__icon"></div>
+            </div>
+            <div class="app__nav">
+                <header class="header">
+					<div class="layout__container header__container">
+					<div class="group group--align-left header__title"><a href="{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/emblem.svg" width="40" height="40" alt="{{ site.title }} logo"> {{ site.title }}</a></div>
+                    </div>
+				</header>
+				<div class="nav">
+                    <form action="{{ site.baseurl }}/search/" method="get">
+                        <input type="text" name="q" id="search-input" placeholder="Search" autocomplete="off">
+                        <input type="submit" value="Search" style="display: none;">
+                    </form>
+                    <ul class="toc-tree nav__toc">
+                        {% assign categories = "contact-syncing, Devices, Media" | split: ", " %}
+                        {% assign grouped = site.docs | group_by: 'category' %}
+                            {% for category in categories %}
+                                {% for group in grouped %}
+                                    {% if group.name != "Components" and category == group.name %}
+                                        <li class="tree-element toc-tree__node toc-tree__node--level_0">
+
+                                            {% assign items = group.items | sort %}
+                                            {% assign expand = false %}
+
+                                            {% for item in items %}
+                                                {% if item.url == page.url and item.category == group.name %}
+                                                    {% assign expand = true %}
+
+                                                {% endif %}
+                                            {% endfor %}
+
+                                            <label class="tree-label toc-tree__title" for="{{ group.name }}">{{ group.name }} ({{ group.items.size }})</label>
+                                            <input class="tree-selector" type="checkbox" {% if expand %} checked {% endif %} id="{{ group.name }}" />
+
+
+                                            <ul class="toc-tree__nodes-list">
+                                                {% for item in items %}
+                                                    {% if item.draft %}
+
+                                                    {% else %}
+                                                        {% if item.type == "GroupHeader" %}
+
+                                                            <li class="tree-element toc-tree__node toc-tree__node--level_1 ">
+
+                                                            <li class="toc-tree__node toc-tree__node--level_1 {% if item.url == page.url %}toc-tree__title--selected{% endif %}">
+                                                                    <div class="toc-tree__title-wrapper">
+                                                                        <a href="{{ site.baseurl }}{{ item.url }}" class="toc-tree__title toc-tree__title--link">{{ item.title }}</a>
+                                                                    </div>
+                                                            </li>
+
+                                                            {% assign subpages = group.items | where:"subpageOf", item.title %}
+                                                            {% for subpage in subpages %}
+                                                                {% if subpage.draft %}
+                                                                {% else %}
+                                                                    <li class="toc-tree__node toc-tree__node--level_2 {% if subpage.url == page.url %}toc-tree__title--selected{% endif %}">
+                                                                        <div class="toc-tree__title-wrapper">
+                                                                            <a href="{{ site.baseurl }}{{ subpage.url }}" class="toc-tree__title toc-tree__title--link">{{ subpage.title }}</a>
+                                                                        </div>
+                                                                    </li>
+                                                                {% endif %}
+                                                            {% endfor %}
+
+                                                        {% elsif item.type == "Subpage" %}
+
+                                                        {% else %}
+                                                            <li class="toc-tree__node toc-tree__node--level_1 {% if item.url == page.url %}toc-tree__title--selected{% endif %}">
+                                                                <div class="toc-tree__title-wrapper">
+                                                                    <a href="{{ site.baseurl }}{{ item.url }}"
+                                                                       class="toc-tree__title toc-tree__title--link">{{ item.title }}</a></div>
+                                                            </li>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            {% if page.type == "full" %}
+            <div class="app__main">
+                <div class="app__container full">
+                    {{content}}
+                </div>
+            </div>
+            {% else %}
+            <div class="app__main">
+                <div class="app__container">
+                    <main class="app__content">
+                        <article class="article article--without-sideblocks"><h1>{{ page.title }}</h1>
+                            {% if page.codename != nil %} <codename>{{ page.codename }}</codename>{% endif %}
+                            {{content}}
+                        </article>
+                    </main>
+                    <footer class="footer app__footer">
+                        <div class="grid-row grid-row--valign-middle grid-row--stretch footer__container footer__container--reduced-right-padding">
+                            <div class="grid-col-4">
+                                <a href="http://blog.naver.com/chps74" class="footer__logo"></a>
+                                <a href="https://github.com/MonosLab/issues">Report issue</a>
+                            </div>
+                            <div class="grid-col">
+                                <div class="footer__copyright">© 2000&hairsp;&ndash;&hairsp;2020 Mono's Lab. All rights reserved.</div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+            {% endif %}
+		</div>
+	</div>
+</div>
+	
+<script type="text/javascript" src="{{ site.baseurl }}/scripts/retina.min.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/scripts/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/scripts/anchors.js"></script>
+
+<script type="text/javascript">
+	document.getElementsByClassName("app__container")[0].onclick = function () {
+		document.getElementsByClassName("app__nav")[0].style.left = null;
+	};
+
+	function toggleMenu() {
+		document.getElementsByClassName("app__nav")[0].style.left = "0px";
+	}
+
+	$(document).ready(setAnchors);
+</script>
+</body>
 </html>
